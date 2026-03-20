@@ -156,6 +156,9 @@ COPY --chown=coder:coder mcp-settings.json /home/coder/.claude-defaults/mcp_sett
 # ── Claude Code skills ─────────────────────────────────────────
 COPY --chown=coder:coder skills /home/coder/.claude/skills
 
+# ── Codex CLI skills ──────────────────────────────────────────
+COPY --chown=coder:coder codex-skills /home/coder/.codex/skills
+
 # ── Auth gateway ─────────────────────────────────────────────
 COPY --chown=coder:coder auth-gateway.py /home/coder/auth-gateway.py
 COPY --chown=coder:coder login.html /home/coder/login.html
