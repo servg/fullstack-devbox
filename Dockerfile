@@ -153,6 +153,9 @@ RUN mkdir -p /home/coder/.claude-defaults
 COPY --chown=coder:coder claude-settings.json /home/coder/.claude-defaults/settings.json
 COPY --chown=coder:coder mcp-settings.json /home/coder/.claude-defaults/mcp_settings.json
 
+# ── Claude Code skills ─────────────────────────────────────────
+COPY --chown=coder:coder skills /home/coder/.claude/skills
+
 # ── Auth gateway ─────────────────────────────────────────────
 COPY --chown=coder:coder auth-gateway.py /home/coder/auth-gateway.py
 COPY --chown=coder:coder login.html /home/coder/login.html
