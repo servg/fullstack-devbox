@@ -1,0 +1,59 @@
+{
+  "editor.fontSize": 14,
+  "editor.tabSize": 4,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "boundary",
+
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.startupEditor": "none",
+
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.fontSize": 13,
+
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-21",
+      "path": "/usr/lib/jvm/temurin-21-jdk-amd64",
+      "default": true
+    }
+  ],
+  "java.jdt.ls.java.home": "/usr/lib/jvm/temurin-21-jdk-amd64",
+  "java.saveActions.organizeImports": true,
+  "java.completion.importOrder": ["java", "javax", "org", "com"],
+
+  "spring-boot.ls.java.home": "/usr/lib/jvm/temurin-21-jdk-amd64",
+
+  "maven.executable.path": "/usr/bin/mvn",
+  "maven.terminal.useJavaHome": true,
+
+  "python.defaultInterpreterPath": "/usr/bin/python3",
+  "python.terminal.activateEnvironment": false,
+
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+
+  "files.exclude": {
+    "**/.git": true,
+    "**/target": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/*.class": true,
+    "**/.idea": true
+  },
+  "files.watcherExclude": {
+    "**/target/**": true,
+    "**/__pycache__/**": true
+  },
+
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "baseUrl": "http://localhost:8090"
+    }
+  },
+
+  "extensions.autoUpdate": false,
+  "telemetry.telemetryLevel": "off",
+  "update.mode": "none"
+}

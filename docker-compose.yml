@@ -1,0 +1,53 @@
+services:
+
+  # ── Dev Box: VS Code + Claude Code + Java/JS/Python ────────
+  devbox:
+    build: .
+    container_name: fullstack-devbox
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - "${PORT:-8080}:8080"          # VS Code Web UI + auth gateway
+      - "${APP_PORT:-8090}:8090"      # App server (Spring Boot / Node / Python)
+      - "${DEBUG_PORT:-5005}:5005"    # Java remote debug (JDWP)
+    environment:
+      # Auth gateway password
+      - PASSWORD=${PASSWORD:-devbox}
+      # Claude Code — API key (leave empty to use subscription via `claude login`)
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      # Base URL override (leave empty for real api.anthropic.com)
+      - ANTHROPIC_BASE_URL=${ANTHROPIC_BASE_URL:-}
+      - API_TIMEOUT_MS=${API_TIMEOUT_MS:-300000}
+      # Git identity
+      - GIT_NAME=${GIT_NAME:-Developer}
+      - GIT_EMAIL=${GIT_EMAIL:-dev@local}
+      # GitHub MCP server
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      - TZ=${TZ:-Europe/Moscow}
+    volumes:
+      # Project workspace — persistent
+      - workspace:/home/coder/workspace
+      # Maven dependency cache — avoids re-downloading on every rebuild
+      - maven-cache:/home/coder/.m2
+      # Claude Code config + history — persistent across restarts
+      - claude-config:/home/coder/.claude
+      # Docker data — persistent for DinD
+      - docker-data:/var/lib/docker
+      # SSH keys — for git push (read-only)
+      - ${SSH_DIR:-~/.ssh}:/home/coder/.ssh:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 5G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  workspace:
+  maven-cache:
+  claude-config:
+  docker-data:
